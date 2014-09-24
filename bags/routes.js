@@ -13,8 +13,8 @@ RoutesBag.prototype.resolve = function resolve(res) {
   var found;
   try {
     this.data.forEach(function (datum) {
-      if (datum.definition.hasId(res.method) && datum.definition.matchRoute(res.url)) {
-        found = datum.definition.findById(res.method);
+      if (datum.definition.matchRoute(res.url)) {
+        found = datum.definition;
       }
     });
   } catch (e) {

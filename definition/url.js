@@ -1,17 +1,11 @@
 "use strict";
 
-var AbstractBag = require('zeujsChaos/bags/abstract.js');
-var MethodsBag = require('./methods.js')
-
 var UrlDefinition = function UrlDefinition(url) {
-  AbstractBag.call(this);
   this.url = url;
   this.routeParams = {};
   this.compileUrl()
 };
 
-UrlDefinition.prototype = Object.create(AbstractBag.prototype);
-UrlDefinition.prototype.constructor = UrlDefinition;
 UrlDefinition.prototype.compileUrl = function compileUrl() {
   var extractPlaceholders = new RegExp(':([a-zA-Z]+)', 'g');
   var routeSegment = '([a-zA-Z0-9_-]+)';
