@@ -4,13 +4,27 @@ var Server = require('../libraries/http.js');
 var Formidable = require('formidable');
 var Querystring = require('qs');
 var Url = require('url');
+var path = require('path');
+var fs = require('fs');
 
 module.exports = function(services) {
   var artemisRoutes = services.findById('apolloRoutes');
   var configs = services.findById('configs');
+  var templates = services.findById('apolloTemplates')
   Server.createServer(function (req, res) {
-    res.services = services;
     req.url = Url.parse(req.url);
+    var existInPublic = templates.resolvePath(path.join('public', req.url.pathname));
+    if (existInPublic) {
+      var stream = fs.createReadStream(existInPublic);
+      stream.on('error', function (error) {
+        res.writeHead(500);
+        res.end();
+      });
+      res.writeHead(200);
+      stream.pipe(res);
+      return;
+    }
+    res.services = services;
     req.query = Querystring.parse(req.url.query);
     var currentRoute = artemisRoutes.resolve(req);
     if (typeof currentRoute === 'undefined') {
