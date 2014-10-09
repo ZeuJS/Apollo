@@ -28,6 +28,9 @@ UrlDefinition.prototype.compileUrl = function compileUrl() {
 UrlDefinition.prototype.matchRoute = function matchRoute(url) {
   var thisContext = this;
   var route = this.compiledUrl.exec(url.pathname);
+  if (route === null) {
+    return false;
+  }
   var routeParamsKeys = Object.keys(this.routeParams)
   if (routeParamsKeys.length > 0) {
     route.forEach(function(element, i) {
