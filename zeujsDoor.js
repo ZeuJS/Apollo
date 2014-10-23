@@ -6,14 +6,14 @@ var RoutesBag = require('./bags/routes.js');
 var MiddlewaresBag = require('./bags/middlewares.js');
 var ChunksBag = require('./bags/chunks.js');
 var FormsBag = require('./bags/forms.js');
-var FormValidationsBag = require('./bags/formValidations.js');
+var FormValidatorsBag = require('./bags/formValidators.js');
 var TemplatesBag = require('./bags/templates.js');
 
 var RoutesMapper = require('./mappers/routes.js');
 var MiddlewaresMapper = require('./mappers/middlewares.js');
 var ChunksMapper = require('./mappers/chunks.js');
 var FormsMapper = require('./mappers/forms.js');
-var FormValidationsMapper = require('./mappers/formValidations.js');
+var FormValidatorsMapper = require('./mappers/formValidators.js');
 var TemplatesMapper = require('./mappers/templates.js');
 
 module.exports =
@@ -45,8 +45,8 @@ module.exports =
       service: new FormsBag(),
     },
     {
-      id: 'apolloFormValidations',
-      service: new FormValidationsBag(),
+      id: 'apolloFormValidators',
+      service: new FormValidatorsBag(),
     },
   ],
   events: [
@@ -76,8 +76,8 @@ module.exports =
         var formsBag = services.findById('apolloForms');
         new FormsMapper(modules, formsBag);
 
-        var formValidationsBag = services.findById('apolloFormValidations');
-        new FormValidationsMapper(modules, formValidationsBag);
+        var formValidatorsBag = services.findById('apolloFormValidators');
+        new FormValidatorsMapper(modules, formValidatorsBag);
       },
     },
   ],
