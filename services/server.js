@@ -50,7 +50,7 @@ module.exports = function(services) {
       if (err) {
         throw err;
       }
-      req.params = fields;
+      req.params = Querystring.parse(fields);
       req.files = files;
       var middlewaresStack = [];
       if (typeof currentRoute.middlewares === 'object') {
