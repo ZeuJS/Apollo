@@ -5,11 +5,15 @@ var path = require('path');
 var RoutesBag = require('./bags/routes.js');
 var MiddlewaresBag = require('./bags/middlewares.js');
 var ChunksBag = require('./bags/chunks.js');
+var FormsBag = require('./bags/forms.js');
+var FormValidationsBag = require('./bags/formValidations.js');
 var TemplatesBag = require('./bags/templates.js');
 
 var RoutesMapper = require('./mappers/routes.js');
 var MiddlewaresMapper = require('./mappers/middlewares.js');
 var ChunksMapper = require('./mappers/chunks.js');
+var FormsMapper = require('./mappers/forms.js');
+var FormValidationsMapper = require('./mappers/formValidations.js');
 var TemplatesMapper = require('./mappers/templates.js');
 
 module.exports =
@@ -36,6 +40,14 @@ module.exports =
       id: 'apolloTemplates',
       service: new TemplatesBag(),
     },
+    {
+      id: 'apolloForms',
+      service: new FormsBag(),
+    },
+    {
+      id: 'apolloFormValidations',
+      service: new FormValidationsBag(),
+    },
   ],
   events: [
     {
@@ -60,6 +72,12 @@ module.exports =
 
         var templatesBag = services.findById('apolloTemplates');
         new TemplatesMapper(modules, templatesBag);
+
+        var formsBag = services.findById('apolloForms');
+        new FormsMapper(modules, formsBag);
+
+        var formValidationsBag = services.findById('apolloFormValidations');
+        new FormValidationsMapper(modules, formValidationsBag);
       },
     },
   ],
