@@ -83,6 +83,10 @@ module.exports =
   ],
   apolloRoutes: [
   ],
+  apolloFormValidators: [
+    require('./formValidators/Email.js'),
+    require('./formValidators/Required.js'),
+  ],
   apolloTemplates: [
     {
       id: "base",
