@@ -48,12 +48,23 @@ function formRow(fieldsContainer, names) {
       + '</label>'
       + '</div>';
   } else {
-    if (typeof fieldsContainer.value === 'string') {
-      optionals += ' value="' + fieldsContainer.value + '"'
+
+    var input;
+    if (fieldsContainer.type === 'textarea') {
+      var value = '';
+      if (typeof fieldsContainer.value === 'string') {
+        value = fieldsContainer.value;
+      }
+      input = '<textarea class="form-control" id="' + idChain.join('_') + '" name="' + inputName + '"' + optionals + '>' + value + '</textarea>';
+    } else {
+      if (typeof fieldsContainer.value === 'string') {
+        optionals += ' value="' + fieldsContainer.value + '"';
+      }
+      input = '<input type="' + fieldsContainer.type + '" class="form-control" id="' + idChain.join('_') + '" name="' + inputName + '"' + optionals + ' />';
     }
     return '<div class="form-group">'
       + '<label for="' + idChain.join('_') + '">' + fieldsContainer.label + '</label>'
-      + '<input type="' + fieldsContainer.type + '" class="form-control" id="' + idChain.join('_') + '" name="' + inputName + '"' + optionals + '>'
+      + input
       + '</div>';
   }
 }
